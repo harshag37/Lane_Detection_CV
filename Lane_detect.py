@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/env python3
 import copy
 import numpy as np
@@ -348,3 +349,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+=======
+!usr/bin/python3
+#initial commit
+>>>>>>> bae03c6eee3fcbaf04bc9840d8740b84708447de
