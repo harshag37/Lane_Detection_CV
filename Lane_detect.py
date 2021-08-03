@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/usr/bin/env python3
 import copy
 import numpy as np
@@ -336,8 +335,7 @@ class TrackVision():
         sceneDetect = copy.deepcopy(scenePyr)
 
         #find lines function
-        sceneDetected,vectors = self.findLines(sceneDetect)
-
+        sceneDetected,vectors = self.findLines(sceneDetect)  ### we can use this VECTORS to control
         cv2.imshow("image",sceneDetected)
         cv2.waitKey(0)
 
@@ -349,7 +347,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-=======
-!usr/bin/python3
-#initial commit
->>>>>>> bae03c6eee3fcbaf04bc9840d8740b84708447de
