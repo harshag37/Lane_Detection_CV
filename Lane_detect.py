@@ -76,6 +76,8 @@ class TrackVision():
                 self.switchVectorPoints=True
                 self.stage = 4
                 
+                
+                
 
         
         #convert image to grayscale
