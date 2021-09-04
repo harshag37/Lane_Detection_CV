@@ -336,6 +336,8 @@ class TrackVision():
                 scenePyr = cv2.pyrDown(scenePyr)
         sceneDetect = copy.deepcopy(scenePyr)
 
+
+
         #find lines function
         sceneDetected,vectors = self.findLines(sceneDetect)  ### we can use this VECTORS to control
         cv2.imshow("image",sceneDetected)
