@@ -80,7 +80,7 @@ class TrackVision():
         
         #convert image to grayscale
         passedImageGray = cv2.cvtColor(passedImage,cv2.COLOR_BGR2GRAY)
-        
+        cv2.imshow("gray",passedImageGray)
         #Image dimensions
         imageHeight, imageWidth = passedImageGray.shape[:2]
         
@@ -90,7 +90,7 @@ class TrackVision():
         
         #Create image mask background
         maskWhite = np.ones(passedImageGrayThresh.shape[:2], dtype="uint8") * 255
-        
+        cv2.imshow("mask_white",maskWhite)
         #calculate points to be masked based on provided ratio
         maskVehicleBoxTopLeftXY = (int(imageWidth*(1.0-self.maskRectRatioWidthHeight[0])/2.0), 
             int(imageHeight*(1.0-self.maskRectRatioWidthHeight[1])))
@@ -101,10 +101,12 @@ class TrackVision():
         
         maskVehicle = cv2.rectangle(maskWhite,maskVehicleBoxTopLeftXY,
             maskVehicleBoxBottomRightXY,color=0,thickness=-1)
+        cv2.imshow("mask_vehicle",maskVehicle)
         
         #Mask out the area of the vehicle
         passedImageGrayThreshMasked = cv2.bitwise_and(passedImageGrayThresh, 
             passedImageGrayThresh, mask=maskVehicle)
+        cv2.imshow("bitwise filter",passedImageGrayThreshMasked)
         
         #Find contours
         cnts, hierarchy = cv2.findContours(passedImageGrayThreshMasked.copy(),
