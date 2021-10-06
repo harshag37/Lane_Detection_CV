@@ -100,7 +100,7 @@ def astar(maze, start, end):
             open_list.append(child)
 
 size=30
-image1=cv2.imread("track2.png")
+image1=cv2.imread("track.png")
 rows,cols,t=(image1.shape)
 row_size=int(rows//size)
 col_size=int(cols/size)
@@ -109,11 +109,13 @@ image=cv2.resize(image,(size,size), fx=1, fy=1, interpolation= cv2.INTER_NEAREST
 
 image = cv2.bitwise_not(cv2.threshold(
             image, 200, 255, cv2.THRESH_BINARY)[1])
+kernel=np.ones((3,3),np.uint8)
+image=cv2.dilate(image,kernel,iterations=1)
 maze=scipy.array(image)
 maze=(maze!=0).astype(int)
 # print(image)
 print(maze)
-start = (size*2//3,size//2)
+start = (size*2//4,size//2)
 i=-1
 n=0
 for x in range(len(image[0])):
