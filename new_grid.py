@@ -100,22 +100,26 @@ def astar(maze, start, end):
             open_list.append(child)
 
 size=30
-image1=cv2.imread("track.png")
+image1=cv2.imread("barricade.png")
 rows,cols,t=(image1.shape)
+image2=image1.copy()
+maskVehicleBoxTopLeftXY = (cols//2-150,rows*2//3)
+maskVehicleBoxBottomRightXY = (cols//2+300,rows*2//3+300)
+sceneDetected = cv2.rectangle(image2,maskVehicleBoxTopLeftXY,maskVehicleBoxBottomRightXY,color=(255,255,255),thickness=-1)
 row_size=int(rows//size)
 col_size=int(cols/size)
-image= cv2.cvtColor(image1,cv2.COLOR_BGR2GRAY)
+image= cv2.cvtColor(sceneDetected,cv2.COLOR_BGR2GRAY)
 image=cv2.resize(image,(size,size), fx=1, fy=1, interpolation= cv2.INTER_NEAREST)
-
 image = cv2.bitwise_not(cv2.threshold(
             image, 200, 255, cv2.THRESH_BINARY)[1])
 kernel=np.ones((3,3),np.uint8)
 image=cv2.dilate(image,kernel,iterations=1)
+
 maze=scipy.array(image)
 maze=(maze!=0).astype(int)
 # print(image)
 print(maze)
-start = (size*2//4,size//2)
+start = (size*2//3,size//2)
 i=-1
 n=0
 for x in range(len(image[0])):
@@ -131,6 +135,7 @@ path = astar(maze, start, end)
 for i in range(len(path)-1):
     cv2.line(image1,(path[i][1]*col_size,path[i][0]*row_size),(path[i+1][1]*col_size,path[i+1][0]*row_size),(0,255,0),3)
 cv2.imshow("iamge",image1)
+cv2.imshow("iamge2",image)
 cv2.waitKey(0)
 print(path)
 
